@@ -51,32 +51,61 @@ export default function Polychromatic() {
 
   return (
     <>
-      <h1>Polychromatic</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 py-4">
+        Polychromatic
+      </h1>
       <div>
-        <Image src={image} alt={image} width={200} height={200} />
-        <div>{time}</div>
-        <div>
-          {coords[0]}, {coords[1]}{" "}
+        <div className="flex flex-col items-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <Image
+              src={image}
+              alt={image}
+              width={200}
+              height={200}
+              className="rounded-lg"
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <div className="font-medium">{time}</div>
+            <div className="text-gray-500">
+              {coords[0]}, {coords[1]}
+            </div>
+          </div>
         </div>
 
-        <table>
-          <thead>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
             <tr>
-              <th>Time</th>
-              <th>Lattitude</th>
-              <th>Longitude</th>
-              <th>Image</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Time
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Lattitude
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Longitude
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                View
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-200">
             {images &&
               images.map((o, index) => {
                 return (
                   <tr key={index}>
-                    <td>{o.time}</td>
-                    <td>{o.coords.lat}</td>
-                    <td>{o.coords.lon}</td>
-                    <td>
+                    <td className="px-6 py-4 whitespace-nowrap">{o.time}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {o.coords.lat}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {o.coords.lon}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <Image
                         src={o.image}
                         alt={o.image}
@@ -84,16 +113,19 @@ export default function Polychromatic() {
                         height={100}
                       />
                     </td>
-                    <button
-                      onClick={() => {
-                        setImage(o.image);
-                        setTime(o.time);
-                        setCoords([o.coords.lat, o.coords.lon]);
-                        document.body.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    >
-                      View
-                    </button>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => {
+                          setImage(o.image);
+                          setTime(o.time);
+                          setCoords([o.coords.lat, o.coords.lon]);
+                          document.body.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        View
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
